@@ -1,0 +1,107 @@
+.full-width {
+    overflow: auto;
+    width: 1000px; 
+    height: 800px; 
+  }
+  .full-width::-webkit-scrollbar {
+    display: none;
+  }
+  
+  table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding:6px 20px;
+    }
+    tr th {
+     border: 1px solid #dddddd;
+      text-align: center;
+      padding:6px 20px;
+    }
+    
+    .content td, .content th {
+        border-top: 1px solid transparent;
+        padding: 2px 10px 2px 15px;
+    }
+  #allpost{
+    background-color: white;
+    align-items: center;
+  }
+  
+  .invoice-container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h5 {
+      text-align: center;
+      // margin: 10px 0;
+  }
+  .company-details, .consignee-details, .buyer-details, .invoice-details, .item-details, .amount-in-words, .tax-details, .signatory {
+      margin: 20px 0;
+  }
+  
+  .consignee-details, .buyer-details{
+    margin-top: -13px;
+  }
+  
+  .detail {
+    // border: 1px solid #000;
+    width: fit-content;
+  }
+  // .container {
+  //   width: 100%;
+  //   border-collapse: collapse;
+  // }
+  .container th, .container td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+  }
+  .section-title {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  hr {
+    border: 1px solid rgb(69, 68, 68);
+  }
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+  }
+  
+  table, th, td {
+      border: 1px solid black !important;
+  }
+  th, td {
+      padding: 8px;
+      text-align: left;
+  }
+  
+  thead {
+      border: 1px solid black;
+  }
+  
+  .item-details table td {
+      text-align: center;
+  }
+  .amount-in-words{
+    border: 1px solid black;
+  }
+  .signatory p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .center-align {
+    text-align: center;
+  }
