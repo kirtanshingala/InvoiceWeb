@@ -24,4 +24,13 @@ GetInvoice(){
    this.items = resp;
   })
 }
+editItem(item: any) {
+  // Add your edit logic here
+  console.log('Editing item', item);
+}
+
+PreviewItem(item: any) {
+  // Add your delete logic here
+  console.log('Deleting item', item);
+}
 }
