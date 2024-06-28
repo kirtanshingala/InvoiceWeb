@@ -7,7 +7,7 @@ import { InvoiceInformationComponent } from './invoice-information/invoice-infor
 import { HomeComponent } from './home/home.component';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { NbCardModule, NbDialogModule, NbThemeModule } from '@nebular/theme';
+import { NbButtonGroupModule, NbCardModule, NbDialogModule, NbInputModule, NbThemeModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,8 @@ import { NbCardModule, NbDialogModule, NbThemeModule } from '@nebular/theme';
     NbThemeModule.forRoot(),
     NbCardModule,
     NbDialogModule.forChild(),
+    NbInputModule,
+    NbButtonGroupModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
