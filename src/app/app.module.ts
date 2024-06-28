@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { InvoiceInformationComponent } from './invoice-information/invoice-information.component';
 import { HomeComponent } from './home/home.component';
-import { NbCardModule, NbThemeModule } from '@nebular/theme';
+import { NbCardModule, NbDialogModule, NbThemeModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { NbCardModule, NbThemeModule } from '@nebular/theme';
     AppRoutingModule,
     NbThemeModule.forRoot(),
     NbCardModule,
+    NbDialogModule.forChild(),
   ],
   providers: [],
   bootstrap: [AppComponent]
