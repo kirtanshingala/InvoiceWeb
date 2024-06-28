@@ -24,7 +24,7 @@ GetInvoice(){
    this.items = resp;
   })
 }
-editItem(item: any) {
+DeleteItem(item: any) {
   // Add your edit logic here
   console.log('Editing item', item);
 }

@@ -13,10 +13,10 @@
         <td>{{ item.to_Name }}</td>
         <td>{{ item.createdDate | date: 'dd-MM-yyyy' }}</td>
         <td>
-          <button (click)="editItem($event)" class="btn btn-primary btn-sm me-3">
+          <button (click)="DeleteItem(item.invoiceID)" class="btn btn-primary btn-sm me-3">
             <i class="fa fa-edit"></i> Preview
           </button>
-          <button (click)="PreviewItem($event)" class="btn btn-danger btn-sm">
+          <button (click)="PreviewItem(item.invoiceID)" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> Delete
           </button>
         </td>
