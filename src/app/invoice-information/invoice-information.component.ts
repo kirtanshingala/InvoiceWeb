@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import jspdf, { jsPDF } from 'jspdf';
+import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 @Component({
@@ -11,7 +11,7 @@ export class InvoiceInformationComponent {
   constructor(private el: ElementRef) { }
 
   generatePdfAndDownload() {
-    var allPost = this.el.nativeElement.querySelector('#allpost');
+    const allPost = this.el.nativeElement.querySelector('#allpost');
     if (allPost) {
       const html2canvasOptions = {
         scale: 2, // Adjust scale as needed
@@ -19,15 +19,29 @@ export class InvoiceInformationComponent {
       };
 
       html2canvas(allPost, html2canvasOptions).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png', 1.0); // Full quality
+        const imgData = canvas.toDataURL('image/png'); // Full quality
 
         const pdf = new jsPDF('portrait', 'pt', 'a4');
         const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
 
         const imgWidth = pageWidth; // Set image width to page width
         const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
 
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        // Split content into multiple pages if necessary
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft > 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
         pdf.save('invoice.pdf');
       });
     }

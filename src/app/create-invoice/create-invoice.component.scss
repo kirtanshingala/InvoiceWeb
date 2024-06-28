@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-right: -25px;
+}
+
+.dateinput {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.main {
+    margin-left: 0px;
+}
+
+nb-card.size-large {
+    height: 100%;
+}
+
+nb-card {
+    &.scroll {
+        height: 80vh;
+    }
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding:6px 20px;
+  }
+  tr th {
+   border: 1px solid #dddddd;
+    text-align: center;
+    padding:6px 20px;
+  }
+  
+  .content td, .content th {
+      border-top: 1px solid transparent;
+      padding: 2px 10px 2px 15px;
+  }
+
+  .lfont{
+    font-weight: 600;
+  }
