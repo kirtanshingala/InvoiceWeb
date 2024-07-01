@@ -8,33 +8,13 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Invoice</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <!-- <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
-            </li> -->
-            <li class="nav-item">
-              <a class="nav-link active" routerLink="/create-invoice">Create-Invoice</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" routerLink="/invoice-information">Invoice-Information</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div id="allpost" style="background-color: white;">
-        <router-outlet>
-          <!-- <app-home/> -->
-        </router-outlet>
-  </div>
-
-
+    <nb-layout>
+      <nb-layout-header fixed>
+        <app-header></app-header>
+      </nb-layout-header>
+      <nb-layout-column class="colored-column-basic">
+        <router-outlet></router-outlet>
+      </nb-layout-column>
+    </nb-layout>
   </body>
 </html>

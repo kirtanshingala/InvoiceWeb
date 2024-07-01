@@ -9,13 +9,16 @@ import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NbButtonGroupModule, NbCardModule, NbDialogModule, NbInputModule, NbThemeModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+// import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateInvoiceComponent,
     InvoiceInformationComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,11 @@ import { FormsModule } from '@angular/forms';
     NbDialogModule.forChild(),
     NbInputModule,
     NbButtonGroupModule,
-    FormsModule
+    FormsModule,
+    // NbButtonModule,
+    // NbLayoutModule,
+    // NbEvaIconsModule,
+    // NbIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
