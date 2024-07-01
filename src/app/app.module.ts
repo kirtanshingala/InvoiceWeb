@@ -7,10 +7,10 @@ import { InvoiceInformationComponent } from './invoice-information/invoice-infor
 import { HomeComponent } from './home/home.component';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { NbButtonGroupModule, NbCardModule, NbDialogModule, NbInputModule, NbThemeModule } from '@nebular/theme';
+import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbDialogModule, NbIconModule, NbInputModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
-// import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
@@ -30,10 +30,10 @@ import { HeaderComponent } from './header/header.component';
     NbInputModule,
     NbButtonGroupModule,
     FormsModule,
-    // NbButtonModule,
-    // NbLayoutModule,
-    // NbEvaIconsModule,
-    // NbIconModule,
+    NbButtonModule,
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NbIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
