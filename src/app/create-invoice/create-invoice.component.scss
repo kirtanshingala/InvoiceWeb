@@ -53,3 +53,9 @@ table {
   .lfont{
     font-weight: 600;
   }
+
+  .required-star {
+    color: red;
+    margin-left: 2px;  /* Optional: to add some space between the label text and the star */
+  }
+  

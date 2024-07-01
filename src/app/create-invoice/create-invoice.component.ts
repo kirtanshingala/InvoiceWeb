@@ -32,15 +32,14 @@ export class CreateInvoiceComponent implements OnInit{
   // invoiceID: string;
   // issueDate: string;
   // currentDate: Date = new Date();
-  totalprice : any = 0;
-  percentAmount: any ;
-  TotalAmount: any
+  price? : number 
+  
 
   constructor( private router: Router , private httpService: HttpService ){
     this.model = new Invoice();
   }
   ngOnInit() {
-    throw new Error('Method not implemented.');
+    
   }
 
   
@@ -49,7 +48,8 @@ export class CreateInvoiceComponent implements OnInit{
     // this.router.navigate(['/admin/invoice-information']);
   }
   onSubmit() {
-    debugger
+
+
   this.httpService.post(`${this.apiController}/AddUpdateInvoice`, this.model).subscribe({
     next: (data: any) => {
       if (data.status) {
@@ -76,7 +76,7 @@ export class CreateInvoiceComponent implements OnInit{
       console.log(error);
       Swal.fire({
         title: 'Error!',
-        text: 'An error occurred while sending the invoice data.',
+        text: 'Please fill in all the required details in this form.',
         icon: 'error',
         confirmButtonText: 'Close',
       });
@@ -88,20 +88,41 @@ export class CreateInvoiceComponent implements OnInit{
 }
 
   multiply(){
-    if(this.model.price != undefined){
-    this.totalprice = this.model.price*this.model.qty
+    if(this.price != undefined){
+    this.model.price = this.price*this.model.qty
+    this.model.taxableAmount= this.model.price
+    this.CGSTPercent();
+    this.SGSTPercent()
   }
   }
 
   CGSTPercent(){
-    this.model.cgsT_Amount = (this.totalprice * this.model.cgsT_Per / 100);
-  }
-  SGSTPercent(){
-    this.model.sgsT_Amount = (this.totalprice * this.model.sgsT_Per / 100);
-    
+    this.model.cgsT_Amount = this.model.price * this.model.cgsT_Per / 100;
+    this.TotalAmount()
+
   }
 
-  totalamount(){
-    this.TotalAmount = this.totalprice + this.model.cgsT_Amount + this.model.sgsT_Amount
+  SGSTPercent() {
+    this.model.sgsT_Amount = this.model.price * this.model.sgsT_Per / 100;
+    this.TotalAmount()
   }
+  
+
+TotalAmount(){
+  this.model.total =  this.model.price + this.model.cgsT_Amount + this.model.sgsT_Amount
+}
+updateTaxableAmount() {
+  
+  if (this.model.cgsT_Per == undefined && this.model.sgsT_Per == undefined)
+  {
+    this.model.cgsT_Amount = 0;
+    this.model.sgsT_Amount= 0;
+
+  }
+  else{
+  this.CGSTPercent();
+  this.SGSTPercent();
+}
+}
+
 }
