@@ -11,39 +11,38 @@ export class InvoiceInformationComponent {
   constructor(private el: ElementRef) { }
 
   generatePdfAndDownload() {
-    const allPost = this.el.nativeElement.querySelector('#allpost');
+    var allPost = this.el.nativeElement.querySelector('#allpost');
     if (allPost) {
-      const html2canvasOptions = {
-        scale: 2, // Adjust scale as needed
-        useCORS: true
-      };
+        const html2canvasOptions = {
+            scale: 2,
+            useCORS: true
+        };
 
-      html2canvas(allPost, html2canvasOptions).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png'); // Full quality
+        html2canvas(allPost, html2canvasOptions).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png',  0.5);
 
-        const pdf = new jsPDF('portrait', 'pt', 'a4');
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
+            const pdf = new jsPDF('portrait', 'pt', 'a4');
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
 
-        const imgWidth = pageWidth; // Set image width to page width
-        const imgHeight = (canvas.height * imgWidth) / canvas.width; // Maintain aspect ratio
+            const canvasAspectRatio = canvas.width / canvas.height;
+            const pageAspectRatio = pageWidth / pageHeight;
 
-        // Split content into multiple pages if necessary
-        let heightLeft = imgHeight;
-        let position = 0;
+            let imgWidth, imgHeight;
 
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+            if (canvasAspectRatio > pageAspectRatio) {
+                imgWidth = pageWidth;
+                imgHeight = pageWidth / canvasAspectRatio;
+            } else {
+                imgHeight = pageHeight;
+                imgWidth = pageHeight * canvasAspectRatio;
+            }
+            const xOffset = (pageWidth - imgWidth) / 2;
+            const yOffset = 0;
 
-        while (heightLeft > 0) {
-          position = heightLeft - imgHeight;
-          pdf.addPage();
-          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-        }
-
-        pdf.save('invoice.pdf');
-      });
+            pdf.addImage(imgData, 'PNG', xOffset, yOffset, imgWidth, imgHeight, '', 'FAST');
+            pdf.save('invoice.pdf');
+        });
     }
   }
 }

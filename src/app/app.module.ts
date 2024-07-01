@@ -7,14 +7,17 @@ import { InvoiceInformationComponent } from './invoice-information/invoice-infor
 import { HomeComponent } from './home/home.component';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { NbButtonGroupModule, NbCardModule, NbDialogModule, NbInputModule, NbThemeModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbDialogModule, NbIconModule, NbInputModule, NbLayoutModule, NbThemeModule } from '@nebular/theme';
+import { HeaderComponent } from './header/header.component';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateInvoiceComponent,
     InvoiceInformationComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,10 @@ import { NbButtonGroupModule, NbCardModule, NbDialogModule, NbInputModule, NbThe
     NbCardModule,
     NbDialogModule.forChild(),
     NbInputModule,
-    NbButtonGroupModule,
+    NbButtonModule,
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NbIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
