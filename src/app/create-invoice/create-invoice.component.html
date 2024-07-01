@@ -35,6 +35,7 @@
     
     
         </nb-card-header>
+        <!-- <form (ngSubmit)="onSubmit()" #myForm="ngForm"> -->
         <nb-card-body>
             <div class="row">
                 <div class="row col-md-12">
@@ -62,20 +63,20 @@
                         <div class="col-md-11">
                             <label class="font-weight-bold mt-3" for="">Bill To</label><br>
                             <label class="mt-2 lfont" for="Name">Name</label><br>
-                            <input class="col-md-10" type="text" nbInput fullWidth id="inputFNane"><br>
+                            <input class="col-md-10" type="text" nbInput fullWidth id="to_Name" name="to_Name" [(ngModel)]="model.to_Name"><br>
                             <label class="mt-3 lfont" for="Mobile Number">Mobile Number</label><br>
-                            <input class="col-md-10" type="text" nbInput fullWidth id="inputFNane" ><br>
+                            <input class="col-md-10" type="text" nbInput fullWidth [(ngModel)]="model.to_MobileNumber"><br>
                             <label class="mt-3 lfont" for="MSME NO">MSME NO <span style="font-weight: 400;"> (if not applicable please write n/a)</span></label><br>
-                            <input class="col-md-10" type="text" nbInput fullWidth id="inputFNane" placeholder="MSME NO"><br>
+                            <input class="col-md-10" type="text" nbInput fullWidth id="to_MSME_NO" placeholder="MSME NO" [(ngModel)]="model.to_MSME_NO"><br>
                             <label class="mt-3 lfont" for="GSTIN / UIN">GSTIN / UIN</label><br>
-                            <input class="col-md-10" type="text" nbInput fullWidth id="inputFNane" ><br>
+                            <input class="col-md-10" type="text" nbInput fullWidth id="to_GSTIN_UIN" [(ngModel)]="model.to_GSTIN_UIN"><br>
                             <label class="mt-3 lfont" for="PAN / IT">PAN / IT</label><br>
-                            <input class="col-md-10" type="text" nbInput fullWidth id="inputFNane" placeholder="PAN / IT"><br>
+                            <input class="col-md-10" type="text" nbInput fullWidth id="to_PAN_IT" placeholder="PAN / IT" [(ngModel)]="model.to_PAN_IT"><br>
                             <label class="mt-3 lfont" for="Email">Email</label><br>
-                            <input class="col-md-10" type="text" nbInput fullWidth id="inputFNane" ><br>
+                            <input class="col-md-10" type="email" nbInput fullWidth  [(ngModel)]="model.to_Email"><br>
                             <label class="mt-3 lfont" for="Address">Address</label><br>
                             <textarea class="col-md-10" name="message" nbInput fullWidth id="about"
-                            shape="semi-round" placeholder="Address" cols="10" rows="5"></textarea>
+                            shape="semi-round" placeholder="Address" cols="10" rows="5" [(ngModel)]="model.to_Address"></textarea>
                         </div>
                     </div>
                 </div>
@@ -93,25 +94,25 @@
                         <tbody class="col-md-12">
                             <tr>
                                 <td class="col-md-2">
-                                    <input class="col-md-12 mt-2" type="text" nbInput fullWidth id="inputDescription">
-                                    <input class="col-md-12 mt-2" type="text" nbInput fullWidth id="inputDescription">
+                                    <input class="col-md-12 mt-2" type="text" nbInput fullWidth id="item" [(ngModel)]="model.item">
+                                    <input class="col-md-12 mt-2" type="text" nbInput fullWidth id="description" [(ngModel)]="model.description">
                                 </td>
                                 <!-- HSN/SAC -->
                                 <td class="col-md-2">
-                                    <input class="mt-2 col-md-12" type="text" maxlength="6" nbInput fullWidth id="inputHSN" placeholder="HSN/SAC" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    <input class="mt-2 col-md-12" type="text" maxlength="6" nbInput fullWidth id="hsN_SAC" placeholder="HSN/SAC" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" [(ngModel)]="model.hsN_SAC">
                                 </td>
                                 <!-- QTY -->
                                 <td class="col-md-1">
-                                    <input class="mt-2 col-md-12" nbInput fullWidth id="inputQty" value="1">
+                                    <input class="mt-2 col-md-12" nbInput fullWidth id="qty"  (change)="multiply()"[(ngModel)]="model.qty">
 
                                 </td>
                                 <!-- PRICE -->
                                 <td class="col-md-2">
-                                    <input class="mt-2 col-md-12"  nbInput fullWidth id="inputPrice">
+                                    <input class="mt-2 col-md-12"  nbInput fullWidth id="price" (change)="multiply()"  [(ngModel)]="model.price">
                                 </td>
                                 <!-- TOTAL -->
                                 <td class="col-md-4">
-                                    <h6 class="mt-3"></h6>
+                                    <h6 class="mt-3">{{totalprice}}</h6>
                                 </td>
                             </tr>
                         </tbody>
@@ -135,16 +136,22 @@
                             <th>Amount</th>
                             </tr>
                             <tr>
-                            <td class="col-md-2"><input class="col-md-12" type="text" nbInput fullWidth id="inputHSN2" value="" placeholder="HSN/SAC"></td>
-                            <td class="col-md-1"><input class="col-md-10" type="text" nbInput fullWidth id="inputTaxableValue"></td>
-                            <td class="col-md-1"><input class="col-md-12" type="text" nbInput  id="inputCGSTRate"></td>
-                            <td class="col-md-1"><input class="col-md-12" type="text" nbInput  id="inputCGSTAmount"></td>
-                            <td class="col-md-1"><input class="col-md-12" type="text" nbInput  id="inputSGSTRate"></td>
-                            <td class="col-md-1"><input class="col-md-12" type="text" nbInput  id="inputSGSTAmount"></td>
-                            <td class="col-md-2"><h6 class="col-md-12"></h6></td>
+                            <td class="col-md-2"><input class="col-md-12" type="text" nbInput fullWidth   placeholder="HSN/SAC"></td>
+                            <td class="col-md-1">
+                                <!-- <input class="col-md-10" type="text" nbInput fullWidth id="taxableAmount" [(ngModel)]="model.taxableAmount"> -->
+                                {{totalprice}}</td>
+                            <td class="col-md-1"><input class="col-md-12" type="text" nbInput  id="cgsT_Per" (change)="CGSTPercent()" [(ngModel)]="model.cgsT_Per"></td>
+                            <td class="col-md-1">{{model.cgsT_Amount}}
+                                <!-- <input class="col-md-12" type="text" nbInput  id="cgsT_Amount"    [(ngModel)]="model.cgsT_Amount"> -->
+                            </td>
+                            <td class="col-md-1"><input class="col-md-12" type="text" nbInput  id="sgsT_Per" (change)="SGSTPercent()" [(ngModel)]="model.sgsT_Per"></td>{{model.sgsT_Amount}}
+                            <td class="col-md-1">
+                                <!-- <input class="col-md-12" type="text" nbInput  id="inputSGSTAmount"  [(ngModel)]="model.sgsT_Amount"> -->
+                            </td>
+                            <td class="col-md-2"><h6 class="col-md-12"> {{TotalAmount}}</h6></td>
                             </tr>
                             <tr>
-                            <td><strong class="float-right">Total</strong></td>
+                            <td><strong class="float-right"></strong></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -160,7 +167,7 @@
                 <nb-card-body>
                     <div class="row">
                         <div class="col-md-12" style="display: flex; justify-content: center; align-items: center;">
-                            <button nbButton status="primary">Primary</button>
+                            <button type="submit" (click)="onSubmit()">Submit</button>
                             <!-- <button class="col-md-12 ml-2" type="submit" nbButton status="primary" (click)="openInvoicePrview()">Preview</button> -->
                             <!-- <button class="col-md-4 ml-2" type="submit" nbButton status="success">Download</button> -->
                             <!-- <button class="col-md-4 ml-2" type="submit" nbButton status="primary" (click)="sendInvoice()">Send Invoice</button> -->
@@ -169,6 +176,7 @@
                 </nb-card-body>
             </nb-card>
         </nb-card-body>
+    <!-- </form> -->
     </nb-card>
 
 

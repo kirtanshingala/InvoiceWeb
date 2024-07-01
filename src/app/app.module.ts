@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NbButtonGroupModule, NbCardModule, NbDialogModule, NbInputModule, NbThemeModule } from '@nebular/theme';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NbButtonGroupModule, NbCardModule, NbDialogModule, NbInputModule, NbThe
     NbDialogModule.forChild(),
     NbInputModule,
     NbButtonGroupModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
