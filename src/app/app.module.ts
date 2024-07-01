@@ -11,6 +11,7 @@ import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbDialogModule, NbIc
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { InvoiceDataService } from './service/invoiceData.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbEvaIconsModule,
     NbIconModule
   ],
-  providers: [],
+  providers: [InvoiceDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

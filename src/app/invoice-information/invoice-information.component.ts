@@ -1,6 +1,8 @@
 import { Component, ElementRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ActivatedRoute } from '@angular/router';
+import { InvoiceDataService } from '../service/invoiceData.service';
 
 @Component({
   selector: 'app-invoice-information',
@@ -8,7 +10,27 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./invoice-information.component.scss']
 })
 export class InvoiceInformationComponent {
-  constructor(private el: ElementRef) { }
+  invoiceData: any;
+  Totaltax: any;
+
+  constructor( private route: ActivatedRoute, private invoiceDataService: InvoiceDataService, private el: ElementRef) { }
+
+  ngOnInit(): void {
+    const invoiceID = this.route.snapshot.paramMap.get('id');
+    console.log('Invoice ID:', invoiceID);  // Log the invoice ID
+    if (invoiceID) {
+      this.invoiceDataService.getInvoiceById(invoiceID).subscribe(
+        (data: any) => {
+          this.invoiceData = data;
+          this.Totaltax = this.invoiceData.cgsT_Amount + this.invoiceData.sgsT_Amount
+          console.log('Invoice Data:', this.invoiceData);  // Log the data
+        },
+        (error: any) => {
+          console.error('Error fetching invoice data:', error);
+        }
+      );
+    }
+  }
 
   generatePdfAndDownload() {
     var allPost = this.el.nativeElement.querySelector('#allpost');

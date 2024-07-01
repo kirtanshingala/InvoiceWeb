@@ -6,6 +6,15 @@
   .full-width::-webkit-scrollbar {
     display: none;
   }
+  .my-element {
+    width: 600px;
+    height: 215px; /* Adjust the height as needed */
+    background-image: url('../../aseets/image/codup-logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 30px; /* Moved the margin-top from the image to here */
+  }
   
   table {
       border-collapse: collapse;
