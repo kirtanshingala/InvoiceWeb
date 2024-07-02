@@ -88,7 +88,7 @@
                         <thead>
                             <tr>
                                 <th width="30%">ITEM<span class="required-star">*</span></th>
-                                <th width="20%">HSN / SAC<span class="required-star">*</span></th>
+                                <th width="20%">HSN / SAC</th>
                                 <th width="20%">QTY<span class="required-star">*</span></th>
                                 <th width="10%">PRICE<span class="required-star">*</span></th>
                                 <th width="30%">TOTAL</th>
@@ -120,10 +120,17 @@
                                 </td>
                             </tr>
                          <tr>
+                            <th>Less : Tds Payble-2024-25</th>
+                            <th></th>
+                            <th></th>
+                            <th> <input class="mt-2 col-md-12"  nbInput fullWidth id="price" (input)="TDSPercent()" [(ngModel)]="model.tdS_Per" [(ngModel)]="model.tdS_Per" placeholder="Price"></th>
+                            <th>{{model.tdS_Amount}}</th>
+                         </tr>
+                         <tr>
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            <th>Total </th>
                             <th>{{model.total}}</th>
                          </tr>
                      
@@ -137,8 +144,8 @@
                             <tr>    
                             <th rowspan="2">HSN / SAC</th>
                             <th rowspan="2">Taxable Value</th>
-                            <th colspan="2">CGST<span class="required-star">*</span></th>
-                            <th colspan="2">SGST / UTGST<span class="required-star">*</span></th>
+                            <th colspan="2">CGST</th>
+                            <th colspan="2">SGST / UTGST</th>
                             <th rowspan="2">Total</th>
                             </tr>
                             <tr>
@@ -180,7 +187,7 @@
                 <nb-card-body>
                     <div class="row" >
                         <div class="col-md-12" style="display: flex; justify-content: center; align-items: center;">
-                            <button  type="submit" nbButton status="danger" (click)="onSubmit()">Cancel</button>
+                            <button  type="submit" nbButton status="danger" >Cancel</button>
                             <button  style="margin-left: 15px;" type="submit" nbButton status="primary" (click)="onSubmit()">Submit</button>
                             
 

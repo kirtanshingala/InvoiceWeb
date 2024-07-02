@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InvoiceDataService {
+  public InvoiceId: any;
   private readonly apiUrl = 'https://localhost:7204/api'; // Base API URL
 
   constructor(private http: HttpClient) { }

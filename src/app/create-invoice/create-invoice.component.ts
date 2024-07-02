@@ -5,14 +5,15 @@ import { Router } from '@angular/router';
 import { Invoice } from '../Model/invoice.model';
 import { HttpService } from '../http.service';
 import Swal from 'sweetalert2';
+import { InvoiceDataService } from '../service/invoiceData.service';
 
 @Component({
   selector: 'app-create-invoice',
   templateUrl: './create-invoice.component.html',
-  styleUrls: ['./create-invoice.component.scss'] // corrected from styleUrl to styleUrls
+  styleUrls: ['./create-invoice.component.scss'], // corrected from styleUrl to styleUrls
 })
-export class CreateInvoiceComponent implements OnInit{
-  private readonly apiController: string = "Invoice";
+export class CreateInvoiceComponent implements OnInit {
+  private readonly apiController: string = 'Invoice';
   // InvoiceUserId: any;
   // UserInvoiceData: any
   model: Invoice;
@@ -32,97 +33,110 @@ export class CreateInvoiceComponent implements OnInit{
   // invoiceID: string;
   // issueDate: string;
   // currentDate: Date = new Date();
-  price? : number 
-  
+  price?: number;
 
-  constructor( private router: Router , private httpService: HttpService ){
+  constructor(private router: Router, private httpService: HttpService, private InvoiceDataService: InvoiceDataService) {
     this.model = new Invoice();
   }
   ngOnInit() {
-    
+    this.GetInvoiceById();
   }
 
-  
-  openInvoicePrview(){
+  openInvoicePrview() {
     // this.ref.close("closeModel");
     // this.router.navigate(['/admin/invoice-information']);
   }
   onSubmit() {
-
-
-  this.httpService.post(`${this.apiController}/AddUpdateInvoice`, this.model).subscribe({
-    next: (data: any) => {
-      if (data.status) {
-        // this.swalService.Success(data.Message);
-        Swal.fire({
-          text: "Invoice Data is Sent Successfully!",
-          icon: 'success',
-          buttonsStyling: false,
-          confirmButtonText: 'Okay',
-          customClass: {
-            confirmButton: 'btn btn-primary',
-          },
-        });
-      } else {
-        Swal.fire({
-          title: 'Error!',
-          text: data.Message,
-          icon: 'error',
-          confirmButtonText: 'Close',
-        });
-      }
-    },
-    error: (error: any) => {
-      console.log(error);
-      Swal.fire({
-        title: 'Error!',
-        text: 'Please fill in all the required details in this form.',
-        icon: 'error',
-        confirmButtonText: 'Close',
-      });
-    },
-    complete: () => {
-      console.log('Request complete');
+    if (this.model.invoiceDate) {
+      this.model.invoiceDate = this.convertToUTC(this.model.invoiceDate);
     }
-  });
-}
-
-  multiply(){
-    if(this.price != undefined){
-    this.model.price = this.price*this.model.qty
-    this.model.taxableAmount= this.model.price
-    this.CGSTPercent();
-    this.SGSTPercent()
+    this.httpService
+      .post(`${this.apiController}/AddUpdateInvoice`, this.model)
+      .subscribe({
+        next: (data: any) => {
+          if (data.status) {
+            // this.swalService.Success(data.Message);
+            Swal.fire({
+              text: 'Invoice Created Successfully!',
+              icon: 'success',
+              buttonsStyling: false,
+              confirmButtonText: 'Okay',
+              customClass: {
+                confirmButton: 'btn btn-primary',
+              },
+            });
+            this.router.navigate(['/home']);
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: data.Message,
+              icon: 'error',
+              confirmButtonText: 'Close',
+            });
+          }
+        },
+        error: (error: any) => {
+          console.log(error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Please fill in all the required details in this form.',
+            icon: 'error',
+            confirmButtonText: 'Close',
+          });
+        },
+        complete: () => {
+          console.log('Request complete');
+        },
+      });
   }
+  private convertToUTC(date: Date): Date {
+    const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    return utcDate;
+  }
+  
+  multiply() {
+    if (this.price != undefined) {
+      this.model.price = this.price * this.model.qty;
+      this.model.taxableAmount = this.model.price;
+      this.CGSTPercent();
+      this.SGSTPercent();
+      this.TDSPercent();
+    }
   }
 
-  CGSTPercent(){
-    this.model.cgsT_Amount = this.model.price * this.model.cgsT_Per / 100;
-    this.TotalAmount()
-
+  CGSTPercent() {
+    this.model.cgsT_Amount = (this.model.price * this.model.cgsT_Per) / 100;
+    this.TotalAmount();
   }
 
   SGSTPercent() {
-    this.model.sgsT_Amount = this.model.price * this.model.sgsT_Per / 100;
-    this.TotalAmount()
+    this.model.sgsT_Amount = (this.model.price * this.model.sgsT_Per) / 100;
+    this.TotalAmount();
   }
-  
-
-TotalAmount(){
-  this.model.total =  this.model.price + this.model.cgsT_Amount + this.model.sgsT_Amount
-}
-updateTaxableAmount() {
-  
-  if (this.model.cgsT_Per == undefined && this.model.sgsT_Per == undefined)
-  {
-    this.model.cgsT_Amount = 0;
-    this.model.sgsT_Amount= 0;
-
+  TDSPercent() {
+    this.model.tdS_Amount = (this.model.price * this.model.tdS_Per) / 100;
+    this.TotalAmount();
   }
-  else{
-  this.CGSTPercent();
-  this.SGSTPercent();
-}
-}
 
+  TotalAmount() {
+    // this.model.total = this.model.price - this.model.cgsT_Amount - this.model.sgsT_Amount;
+    this.model.total = this.model.price - this.model.tdS_Amount;
+  }
+  updateTaxableAmount() {
+    if (this.model.cgsT_Per == undefined && this.model.sgsT_Per == undefined) {
+      this.model.cgsT_Amount = 0;
+      this.model.sgsT_Amount = 0;
+    } else {
+      this.CGSTPercent();
+      this.SGSTPercent();
+      this.TDSPercent();
+    }
+  }
+  GetInvoiceById() {
+    const invoiceId = this.InvoiceDataService.InvoiceId
+    console.log(invoiceId);
+    this.httpService.get(`${this.apiController}/GetInvoiceById?InvoiceID=` + invoiceId).subscribe((resp: any) => {
+      this.model = resp
+    });
+  }
 }

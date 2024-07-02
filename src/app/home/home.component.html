@@ -11,7 +11,7 @@
     <tbody>
       <tr *ngFor="let item of items">
         <td>{{ item.to_Name }}</td>
-        <td>{{ item.createdDate | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ item.invoiceDate | date: 'dd-MM-yyyy' }}</td>
         <td>
           <button (click)="EditItem(item.invoiceID,$event)" class="btn btn-success btn-sm me-3">
             <nb-icon icon="edit-outline"></nb-icon>

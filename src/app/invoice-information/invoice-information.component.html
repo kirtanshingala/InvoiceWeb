@@ -1,60 +1,64 @@
-<div id="allpost">
+<div id="allpost" style="width: 80%;">
     <nb-card >
-        <nb-card-body class="ml-5">
-            <div class="my-element">
-                <!-- <img  src="../../aseets/image/codup-logo.png" alt="Codup Logo"> -->
-            </div>
-            <h5 class="mt-5" style="margin-left: -91px;">Tax Invoice</h5>
+        <nb-card-body class="ml-5 container" style="font-size: 22px; width: 100%;">
+            <!-- <div class="my-element">
+            </div> -->
+            <h5 class="mt-5" style="margin-left: -91px; font-size: 35px;">INVOICE</h5>
             <table class="" style="width: 100%; margin: 0px">
                 <tr>
                     <td class="detail" style="width: 50%;">
                         <div class="company-details">
-                            <h6>CODUP TECHNOLOGIES PRIVATE LIMITED</h6>
-                            <p style="font-weight: 600;">12th floor, Office no. 1214 to 1217,<br>
+                            <h6  style="font-size: 20px; font-weight: 600;">CODUP TECHNOLOGIES PRIVATE LIMITED</h6>
+                            <p style="font-size: 20px;">12th floor, Office no. 1214 to 1217,<br>
                                 I Square Building, Near Heer Party Plot,<br>
                                 Near Shukan Mall X Roads,<br>
                                 Science City Road, Sola, Ahmedabad,<br>
                                 Gujarat, 380060</p>
-                            <p style="margin-top: -10px; font-weight: 600;">GSTIN/UIN: 24AAKCC0657J1ZM</p>
-                            <p style="margin-top: -15px; font-weight: 600;">State Name: Gujarat, Code : 24</p>
+                            <p style="margin-top: -10px; font-size: 20px;">GSTIN/UIN: 24AAKCC0657J1ZM</p>
+                            <p style="margin-top: -15px; font-size: 20px;">State Name: Gujarat, Code : 24</p>
                         </div>
                         <hr>
                         <div class="details-section">
-                            <div class="consignee-details">
-                                <p style="font-weight: 600;">Consignee (Ship to)</p>
-                                <h6>{{invoiceData?.to_Name}}</h6>
-                                <p style="width: 350px; font-weight: 600;">Address: {{invoiceData?.to_Address}}</p>
-                                <p style="margin-top: -10px; font-weight: 600;">GSTIN/UIN: {{invoiceData?.to_GSTIN_UIN}}</p>
-                                <p style="margin-top: -15px; font-weight: 600;">State Name: Gujarat, Code : 24</p>
+                            <div class="company-details">
+                                <p style="font-size: 20px;">Consignee (Ship to)</p>
+                                <h6 style="font-size: 20px; font-weight: 600;">CODUP TECHNOLOGIES PRIVATE LIMITED</h6>
+                                <p style="font-size: 20px;">12th floor, Office no. 1214 to 1217,<br>
+                                    I Square Building, Near Heer Party Plot,<br>
+                                    Near Shukan Mall X Roads,<br>
+                                    Science City Road, Sola, Ahmedabad,<br>
+                                    Gujarat, 380060</p>
+                                <p style="margin-top: -10px; font-size: 20px;">GSTIN/UIN: 24AAKCC0657J1ZM</p>
+                                <p style="margin-top: -15px; font-size: 20px;">State Name: Gujarat, Code : 24</p>
                             </div>
                             <hr>
                             <div class="buyer-details">
-                                <p>Buyer (Bill to)</p>
-                                <h6>{{invoiceData?.to_Name}}</h6>
-                                <p style="width: 350px; font-weight: 600;">Address: {{invoiceData?.to_Address}}</p>
-                                <p style="margin-top: -10px; font-weight: 600;">GSTIN/UIN: {{invoiceData?.to_GSTIN_UIN}}</p>
-                                <p style="margin-top: -15px; font-weight: 600;">State Name : Gujarat, Code : 24</p>
+                                <p style="font-size: 20px;">Supplier (Bill from)</p>
+                                <h6 style="font-size: 20px;">{{invoiceData?.to_Name}}</h6>
+                                <!-- <p style="width: 350px; font-weight: 600;">Address: {{invoiceData?.to_Address}}</p> -->
+                                <!-- <p style="margin-top: -10px; font-weight: 600;">GSTIN/UIN: {{invoiceData?.to_GSTIN_UIN}}</p> -->
+                                <p style="font-size: 20px;">State Name : Gujarat, Code : 24</p>
                             </div>
                         </div>
                     </td>
                     <td class="invoice-details" style="width: 50%;">
                         <table style="height: 650px; margin-bottom: 0px;">
                             <tr style="height: 50px;">
-                                <td style="font-weight: 600;">Invoice No.
+                                <td style=" font-size: 20px;">Invoice No :
                                     <span style="font-weight: 700;">{{invoiceData?.invoiceNumber}}</span>
                                 </td>
-                                <td style="font-weight: 600;">Dated
+                                <td style="font-size: 20px;">Dated :
                                     <span style="font-weight: 700;">{{invoiceData?.invoiceDate | date : "dd-MMM-yyyy"}}</span>
                                 </td>
                             </tr>
-                            <tr style="height: 50px;">
-                                <td style="font-weight: 600;">Delivery Note</td>
-                                <td style="font-weight: 600;">Mode/Terms of Payment</td>
+                            <tr >
+                                <td style="height: 50px;"><span style="float: left; font-size: 19px;">Supplier Invoice No. & Date : <br><b>{{invoiceData?.invoiceNumber}}  dt. {{invoiceData?.invoiceDate | date : "dd-MMM-yyyy"}}</b></span></td>
+                                <td style="height: 50px;"><span style="float: left; font-size: 19px;">Other References :</span></td>
                             </tr>
-                            <tr style="height: 50px;">
-                                <td style="font-weight: 600;">Reference No. & Date.</td>
-                                <td style="font-weight: 600;">Other References</td>
-                            </tr>
+                            <tr>
+                                <td colspan="2" ><span style="float: left; margin-top: -463px;"></span>
+                                </td>
+                            </tr> 
+                            <!-- 
                             <tr style="height: 50px;">
                                 <td style="font-weight: 600;">Buyer's Order No.</td>
                                 <td style="font-weight: 600;">Dated</td>
@@ -70,7 +74,7 @@
                             <tr>
                                 <td colspan="2" style="font-weight: 600;"><span style="float: left; margin-top: -163px;">Terms of Delivery</span>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </table>
                     </td>
                 </tr>
@@ -82,45 +86,64 @@
                         <tr>
                             <th>Sl No.</th>
                             <th>Particulars</th>
-                            <th>HSN/SAC</th>
+                            <!-- <th>HSN/SAC</th> -->
                             <th>Quantity</th>
                             <th>Rate</th>
-                            <th>per</th>
+                            <th>Per</th>
                             <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="border: none !important;">
-                            <td valign="top"><br>1</td>
-                            <td><span style="font-weight: 700; float: left;"></span>
-                                <span style="float: left; font-weight: 700;">{{invoiceData?.item}}</span> <br>
-                                <span style="float: left;"></span> <br>
+                            <td valign="top">1
+                                <br><br><br><br><br><br><br><br>2
+                            </td>
+                            
+                            <td style="font-size: 21px;"><span style="font-weight: 700; float: left;"></span>
+                                <span style="float: left; font-weight: 700;">{{invoiceData?.item}}</span> <br><br>
+                                <span style="float: left;">Vraj Pandya - Consultant - Technical</span><br>
+                                <span style="float: left;">Monthly rate = 30,000</span> <br>
+                                <span style="float: left;">Total Working Days June 24 = 20</span> <br>
+                                <span style="float: left;">Actual Working Days June 24 = 20</span>  <br><br><br>
+                                <span style="float: left;">Less : <b>Tds Payble-2024-25</b></span> <br>
                                 <span style="float: left;"></span> <br><br><br>
-                                <span style="font-weight: 700; float: right;">Output CGST&#64;{{invoiceData?.cgsT_Per}}%</span><br>
-                                <span style="font-weight: 700; float: right;">Output SGST&#64;{{invoiceData?.sgsT_Per}}%</span><br><br>
+                                <!-- <span style="font-weight: 700; float: right;">Output CGST&#64;</span> -->
+                                <br>
+                                <!-- <span style="font-weight: 700; float: right;">Output SGST&#64;</span> -->
+                                <br><br><br><br>
                                 <span style="float: left;"><span style="font-weight: 700;">
                                         </span><br></span><br><br><br><br><br><br><br><br><br><br>
                             </td>
-                            <td style="font-weight: 700;" valign="top"><br>{{invoiceData?.hsN_SAC}}</td>
-                            <td valign="top"><br>{{invoiceData?.qty}}</td>
-                            <td> <br><br><br> <br><span style="float: right; font-weight: 600;">{{invoiceData?.cgsT_Per}}</span>
-                                <br><span style="float: right; font-weight: 600;">{{invoiceData?.sgsT_Per}}</span><br><br><br><br><br><br><br><br><br><br>
+                            <!-- <td style="font-weight: 700;" valign="top"><br>{{invoiceData?.hsN_SAC}}</td> -->
+                            <td valign="top"><br></td>
+                            <td valign="top"><br><br><br><br><br><br><br><br>
+                                <!-- <span style="float: right; font-weight: 600;">{{invoiceData?.cgsT_Per}}</span> -->
+                                
+                                <!-- <span style="float: right; font-weight: 600;">{{invoiceData?.sgsT_Per}}</span> -->
+                                
+                                <span style="float: right; font-weight: 600;">{{invoiceData?.tdS_Per}}</span><br><br><br><br><br><br><br><br>
                             </td>
-                            <td> <br><br><br><br> <span style="float: left; font-weight: 600;">%</span>
-                                <br> <span style="float: left; font-weight: 600;">%</span><br><br><br><br><br><br><br><br><br><br>
+                            <td  valign="top"><br><br><br><br><br><br><br><br>
+                                <!-- <span style="float: left; font-weight: 600;">%</span> -->
+                               
+                                <!-- <span style="float: left; font-weight: 600;">%</span> -->
+                                
+                                <span style="float: left; font-weight: 600;">%</span><br><br><br><br><br><br><br><br>
                             </td>
 
-                            <td style="font-weight: 700;">
-                                <br><span>{{invoiceData?.price}}</span> <br><br><br><br><br><br>
-                                <span>{{invoiceData?.cgsT_Amount}}</span> <br>
-                                <span>{{invoiceData?.sgsT_Amount}}</span> <br><br><br>
+                            <td style="font-weight: 700;" valign="top">
+                                <span>{{invoiceData?.price}}</span> <br><br><br><br><br><br><br><br>
+                                <!-- <span>{{invoiceData?.cgsT_Amount}}</span> -->
+                                
+                                <!-- <span>{{invoiceData?.sgsT_Amount}}</span> -->
+                                
+                                <span>(-){{invoiceData?.tdS_Amount}}</span><br>
                                 <span></span> <br><br><br><br><br><br><br><br><br><br>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td><span style="float: right; font-weight: 700;">Total</span></td>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -131,16 +154,16 @@
             </div>
 
             <div class="amount-in-words" style="margin: 0px; width: 100%;">
-                <span style="float: right; font-weight: 600;">E. & O.E &nbsp;</span>
-                <p style=" margin: 0px;">&nbsp; Amount Chargeable (in words): <br>
-                    <span style="font-weight: 700;">&nbsp; {{AmountValue|amountInWords}}</span>
+                <span style="float: right;">E. & O.E &nbsp;</span>
+                <p style=" margin: 4px; font-size: 18px;">&nbsp; Amount Chargeable (in words): <br>
+                    <span style="font-weight: 600; font-size: 20px;">&nbsp;INR {{AmountValue|amountInWords}}</span>
                 </p>
             </div>
 
             <div class="tax-details" style="margin: 0px; width: 100%;">
                 <table class="table" style="width: 100%;">
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                             <th rowspan="2" style="text-align: center;"><br>HSN/SAC</th>
                             <th rowspan="2" style="text-align: center;"><br>Taxable Value</th>
                             <th colspan="2" style="text-align: center;">CGST</th>
@@ -195,9 +218,10 @@
                         </tr>
                         <tr>
                             <td colspan="7" style="text-align: left;">Tax Amount (in words): <span style="font-weight: 700;">{{Totaltax|amountInWords}}</span></td>
-                        </tr>
+                        </tr> -->
                         <tr>
-                            <td colspan="7" style="text-align: right;"><span style="font-weight: 700;">for CODUP TECHNOLOGIES PRIVATE LIMITED</span> <br><br><br>Authorised Signatory</td>
+                            <td>Company's GSTIN/UIN :</td>
+                            <td colspan="7" style="text-align: right;"><span style="font-weight: 700;">for {{invoiceData?.to_Name}}</span> <br><br><br>Authorised Signatory</td>
                         </tr>
                     </tbody>
                 </table>

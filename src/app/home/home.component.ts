@@ -5,6 +5,7 @@ import { NbDialogService } from '@nebular/theme';
 import { CreateInvoiceComponent } from '../create-invoice/create-invoice.component';
 import { Router } from '@angular/router';
 import { InvoiceDataService } from '../service/invoiceData.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -33,17 +34,55 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  EditItem(item: any, event: Event) {
-    this.dialogService.open(CreateInvoiceComponent, {
-      hasBackdrop: true,
-    }).onClose.subscribe(comments => {
-      // handle dialog close
-    });
-    console.log("Edit");
-  }
 
   DeleteItem(item: any) {
     console.log('Deleting item', item);
+  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Call your delete service or perform the delete action here
+        this.httpService.delete(`${this.apiController}/DeleteInvoice?InvoiceID=` + item).subscribe({
+          next: (data: any) => {
+            Swal.fire(
+              'Deleted!',
+              'Your item has been deleted.',
+              'success'
+            )
+            this.GetInvoice()
+          },
+          error: (err) => {
+            Swal.fire(
+              'Error!',
+              'There was a problem deleting your item.',
+              'error'
+            );
+          }
+        });
+      }
+    });
+  }
+  
+  nextMethod() {
+    // Your next method logic here
+    console.log('Next method called');
+    // For example, you can navigate to another page or refresh data
+  }
+  
+  EditItem(item: any, event: Event) {
+    this.invoiceDataService.InvoiceId = item
+    this.dialogService.open(CreateInvoiceComponent, {
+      hasBackdrop: true,
+      
+    });
+    console.log("Edit");
   }
 
   PreviewItem(invoiceID: number, event: Event) {
