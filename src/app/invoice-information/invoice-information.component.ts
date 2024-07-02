@@ -12,6 +12,8 @@ import { InvoiceDataService } from '../service/invoiceData.service';
 export class InvoiceInformationComponent {
   invoiceData: any;
   Totaltax: any;
+  AmountValue: string = "";
+  TaxAmountValue: string = "";
 
   constructor( private route: ActivatedRoute, private invoiceDataService: InvoiceDataService, private el: ElementRef) { }
 
@@ -22,6 +24,7 @@ export class InvoiceInformationComponent {
       this.invoiceDataService.getInvoiceById(invoiceID).subscribe(
         (data: any) => {
           this.invoiceData = data;
+          this.AmountValue = this.invoiceData.total
           this.Totaltax = this.invoiceData.cgsT_Amount + this.invoiceData.sgsT_Amount
           console.log('Invoice Data:', this.invoiceData);  // Log the data
         },

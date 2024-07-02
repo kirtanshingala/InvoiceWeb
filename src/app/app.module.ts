@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { InvoiceDataService } from './service/invoiceData.service';
+import { AmountInWordsPipe } from './invoice-information/amount-in-words.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InvoiceDataService } from './service/invoiceData.service';
     CreateInvoiceComponent,
     InvoiceInformationComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    AmountInWordsPipe
   ],
   imports: [
     BrowserModule,

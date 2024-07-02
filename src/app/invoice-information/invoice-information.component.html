@@ -41,10 +41,10 @@
                         <table style="height: 650px; margin-bottom: 0px;">
                             <tr style="height: 50px;">
                                 <td style="font-weight: 600;">Invoice No.
-                                    <span style="font-weight: 700;">SYN/2024-25/130</span>
+                                    <span style="font-weight: 700;">{{invoiceData?.invoiceNumber}}</span>
                                 </td>
                                 <td style="font-weight: 600;">Dated
-                                    <span style="font-weight: 700;">{{invoiceData?.createdDate | date : "dd-MMM-yyyy"}}</span>
+                                    <span style="font-weight: 700;">{{invoiceData?.invoiceDate | date : "dd-MMM-yyyy"}}</span>
                                 </td>
                             </tr>
                             <tr style="height: 50px;">
@@ -96,15 +96,15 @@
                                 <span style="float: left; font-weight: 700;">{{invoiceData?.item}}</span> <br>
                                 <span style="float: left;"></span> <br>
                                 <span style="float: left;"></span> <br><br><br>
-                                <span style="font-weight: 700; float: right;">Output CGST&#64;9%</span><br>
-                                <span style="font-weight: 700; float: right;">Output SGST&#64;9%</span><br><br>
+                                <span style="font-weight: 700; float: right;">Output CGST&#64;{{invoiceData?.cgsT_Per}}%</span><br>
+                                <span style="font-weight: 700; float: right;">Output SGST&#64;{{invoiceData?.sgsT_Per}}%</span><br><br>
                                 <span style="float: left;"><span style="font-weight: 700;">
                                         </span><br></span><br><br><br><br><br><br><br><br><br><br>
                             </td>
                             <td style="font-weight: 700;" valign="top"><br>{{invoiceData?.hsN_SAC}}</td>
-                            <td></td>
-                            <td> <br><br><br> <br><span style="float: right; font-weight: 600;">9</span>
-                                <br><span style="float: right; font-weight: 600;">9</span><br><br><br><br><br><br><br><br><br><br>
+                            <td valign="top"><br>{{invoiceData?.qty}}</td>
+                            <td> <br><br><br> <br><span style="float: right; font-weight: 600;">{{invoiceData?.cgsT_Per}}</span>
+                                <br><span style="float: right; font-weight: 600;">{{invoiceData?.sgsT_Per}}</span><br><br><br><br><br><br><br><br><br><br>
                             </td>
                             <td> <br><br><br><br> <span style="float: left; font-weight: 600;">%</span>
                                 <br> <span style="float: left; font-weight: 600;">%</span><br><br><br><br><br><br><br><br><br><br>
@@ -133,7 +133,7 @@
             <div class="amount-in-words" style="margin: 0px; width: 100%;">
                 <span style="float: right; font-weight: 600;">E. & O.E &nbsp;</span>
                 <p style=" margin: 0px;">&nbsp; Amount Chargeable (in words): <br>
-                    <span style="font-weight: 700;">&nbsp; INR Five Thousand Nine Hundred Only</span>
+                    <span style="font-weight: 700;">&nbsp; {{AmountValue|amountInWords}}</span>
                 </p>
             </div>
 
@@ -161,13 +161,13 @@
                                 <h6 class="font-weight-bold" style="font-size: 15px;">{{invoiceData?.total}}</h6>
                             </td>
                             <td style="text-align: center;">
-                                <h6 class="font-weight-bold" style="font-size: 15px;">9%</h6>
+                                <h6 class="font-weight-bold" style="font-size: 15px;">{{invoiceData?.cgsT_Per}}%</h6>
                             </td>
                             <td style="text-align: center;">
                                 <h6 class="font-weight-bold" style="font-size: 15px;">{{invoiceData?.cgsT_Amount}}</h6>
                             </td>
                             <td style="text-align: center;">
-                                <h6 class="font-weight-bold" style="font-size: 15px;">9%</h6>
+                                <h6 class="font-weight-bold" style="font-size: 15px;">{{invoiceData?.sgsT_Per}}%</h6>
                             </td>
                             <td style="text-align: center;">
                                 <h6 class="font-weight-bold" style="font-size: 15px;">{{invoiceData?.sgsT_Amount}}</h6>
@@ -194,7 +194,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="7" style="text-align: left;">Tax Amount (in words): <span style="font-weight: 700;">INR Nine Hundred Only</span></td>
+                            <td colspan="7" style="text-align: left;">Tax Amount (in words): <span style="font-weight: 700;">{{Totaltax|amountInWords}}</span></td>
                         </tr>
                         <tr>
                             <td colspan="7" style="text-align: right;"><span style="font-weight: 700;">for CODUP TECHNOLOGIES PRIVATE LIMITED</span> <br><br><br>Authorised Signatory</td>
