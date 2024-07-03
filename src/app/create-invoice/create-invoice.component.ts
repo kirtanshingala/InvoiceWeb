@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 import { InvoiceInformationComponent } from '../invoice-information/invoice-information.component';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { InvoiceDataService } from '../service/invoiceData.service';
 })
 export class CreateInvoiceComponent implements OnInit {
   private readonly apiController: string = 'Invoice';
+  @Input() invoiceId?:number ;
   // InvoiceUserId: any;
   // UserInvoiceData: any
   model: Invoice;
@@ -39,7 +40,7 @@ export class CreateInvoiceComponent implements OnInit {
     this.model = new Invoice();
   }
   ngOnInit() {
-    this.GetInvoiceById();
+    this.GetInvoiceById()
   }
 
   openInvoicePrview() {
@@ -55,7 +56,6 @@ export class CreateInvoiceComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
           if (data.status) {
-            // this.swalService.Success(data.Message);
             Swal.fire({
               text: 'Invoice Created Successfully!',
               icon: 'success',
@@ -69,14 +69,14 @@ export class CreateInvoiceComponent implements OnInit {
           } else {
             Swal.fire({
               title: 'Error!',
-              text: data.Message,
+              text: data.Message || 'An error occurred.',
               icon: 'error',
               confirmButtonText: 'Close',
             });
           }
         },
         error: (error: any) => {
-          console.log(error);
+          console.error(error);
           Swal.fire({
             title: 'Error!',
             text: 'Please fill in all the required details in this form.',
@@ -89,7 +89,11 @@ export class CreateInvoiceComponent implements OnInit {
         },
       });
   }
+  
   private convertToUTC(date: Date): Date {
+    if (!(date instanceof Date)) {
+      date = new Date(date); 
+    }
     const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
     return utcDate;
   }
@@ -133,10 +137,15 @@ export class CreateInvoiceComponent implements OnInit {
     }
   }
   GetInvoiceById() {
-    const invoiceId = this.InvoiceDataService.InvoiceId
-    console.log(invoiceId);
-    this.httpService.get(`${this.apiController}/GetInvoiceById?InvoiceID=` + invoiceId).subscribe((resp: any) => {
+    // const invoiceId = this.InvoiceDataService.InvoiceId
+    console.log(this.invoiceId);
+    this.httpService.get(`${this.apiController}/GetInvoiceById?InvoiceID=` + this.invoiceId).subscribe((resp: any) => {
       this.model = resp
     });
+  }
+  onCancel() {
+    // Navigate back to the previous page or reset the form
+    this.router.navigate(['/home']); // Adjust the route as needed
+    // Or, to reset the form, you can use this.exampleForm.reset();
   }
 }

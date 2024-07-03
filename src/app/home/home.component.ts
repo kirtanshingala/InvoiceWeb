@@ -70,15 +70,14 @@ export class HomeComponent implements OnInit {
     });
   }
   
-  nextMethod() {
-    // Your next method logic here
-    console.log('Next method called');
-    // For example, you can navigate to another page or refresh data
-  }
+
   
   EditItem(item: any, event: Event) {
     this.invoiceDataService.InvoiceId = item
     this.dialogService.open(CreateInvoiceComponent, {
+      context:{
+          invoiceId: item
+      },
       hasBackdrop: true,
       
     });
