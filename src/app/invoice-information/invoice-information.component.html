@@ -1,3 +1,4 @@
+<div class="main">
 <div id="allpost" style="width: 80%;">
     <nb-card >
         <nb-card-body class="ml-5 container" style="font-size: 22px; width: 100%;">
@@ -101,8 +102,8 @@
                             
                             <td style="font-size: 21px;"><span style="font-weight: 700; float: left;"></span>
                                 <span style="float: left; font-weight: 700;">{{invoiceData?.item}}</span> <br><br>
-                                <span style="float: left;">Vraj Pandya - Consultant - Technical</span><br>
-                                <span style="float: left;">Monthly rate = 30,000</span> <br>
+                                <span style="float: left;">{{invoiceData?.description}}</span><br>
+                                <span style="float: left;">Monthly rate = {{invoiceData?.price}}</span> <br>
                                 <span style="float: left;">Total Working Days June 24 = 20</span> <br>
                                 <span style="float: left;">Actual Working Days June 24 = 20</span>  <br><br><br>
                                 <span style="float: left;">Less : <b>Tds Payble-2024-25</b></span> <br>
@@ -233,6 +234,7 @@
             </div>
         </nb-card-body>
     </nb-card>
+</div>
 </div>
 <div class="col-md-12" style="display: flex; justify-content: center; align-items: center;">
     <button type="submit" nbButton status="primary" (click)="generatePdfAndDownload()">Download</button>

@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   private readonly apiController: string = "Invoice";
 
   items: any = [];
+  searchText: string = '';
 
   constructor(
     private dialogService: NbDialogService,
@@ -87,5 +88,16 @@ export class HomeComponent implements OnInit {
   PreviewItem(invoiceID: number, event: Event) {
     this.router.navigate(['/invoice-information', invoiceID]);
     console.log('Preview item', invoiceID);
+  }
+  filteredItems() {
+    if (!this.searchText.trim()) {
+      return this.items;
+    }
+    return this.items.filter((item: any) =>
+      item.to_Name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
+  clearSearch() {
+    this.searchText = '';
   }
 }
